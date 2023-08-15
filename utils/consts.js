@@ -1,6 +1,7 @@
 export const MESSAGE = {
   COMMON: {
     NOT_FOUND: 'По указанному пути ничего не найдено',
+    SERVER_ERROR: 'На сервере произошла ошибка',
   },
   USER: {
     NOT_FOUND: 'Пользователь не найден',
@@ -33,3 +34,5 @@ export const ALLOWED_CORS = [
 ]
 
 export const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE'
+
+export const URL_REGEX = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/

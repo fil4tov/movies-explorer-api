@@ -12,9 +12,9 @@ import {
 
 const router = express.Router()
 
-router.get('/', getAllFavoritesMovies)
-router.post('/', celebrateCreateMovie, addMovieToFavorites)
-router.delete('/:movieId', celebrateDeleteMovie, deleteMovieFromFavorites)
+router.get('/movies', getAllFavoritesMovies)
+router.post('/movies', celebrateCreateMovie, addMovieToFavorites)
+router.delete('/movies:_id', celebrateDeleteMovie, deleteMovieFromFavorites)
 
 export {
   router as moviesRouter,

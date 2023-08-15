@@ -12,15 +12,16 @@ export const addMovieToFavorites = (req, res, next) => {
 }
 
 export const getAllFavoritesMovies = (req, res, next) => {
-  Movie.find({})
+  const owner = req.user._id
+  Movie.find({ owner })
     .then((movies) => res.send(movies))
     .catch(next)
 }
 
 export const deleteMovieFromFavorites = (req, res, next) => {
-  const movieId = Number(req.params.movieId)
+  const { _id } = req.params
 
-  Movie.findOne({ movieId })
+  Movie.findById(_id)
     .orFail(() => {
       throw new NotFoundError(MESSAGE.MOVIE.NOT_FOUND)
     })

@@ -10,8 +10,8 @@ import {
 
 const router = express.Router()
 
-router.get('/me', getUserInfo)
-router.patch('/me', celebratePatchUserInfo, patchUserInfo)
+router.get('/users/me', getUserInfo)
+router.patch('/users/me', celebratePatchUserInfo, patchUserInfo)
 
 export {
   router as usersRouter,

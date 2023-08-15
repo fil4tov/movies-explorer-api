@@ -1,4 +1,5 @@
 import { celebrate, Joi } from 'celebrate'
+import { URL_REGEX } from '../utils/consts.js'
 
 export const celebrateCreateMovie = celebrate({
   body: Joi.object().keys({
@@ -7,9 +8,9 @@ export const celebrateCreateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().uri(),
-    trailerLink: Joi.string().required().uri(),
-    thumbnail: Joi.string().required().uri(),
+    image: Joi.string().required().uri().pattern(URL_REGEX),
+    trailerLink: Joi.string().required().uri().pattern(URL_REGEX),
+    thumbnail: Joi.string().required().uri().pattern(URL_REGEX),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
@@ -18,6 +19,6 @@ export const celebrateCreateMovie = celebrate({
 
 export const celebrateDeleteMovie = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.number().required(),
+    _id: Joi.string().length(24).hex().required(),
   }),
 })

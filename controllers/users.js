@@ -1,9 +1,14 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { User } from '../models/user.js'
-import { NotFoundError, UnauthorizedError } from '../utils/errors/index.js'
+import {
+  ConflictError,
+  NotFoundError,
+  UnauthorizedError,
+} from '../utils/errors/index.js'
 import { MESSAGE } from '../utils/consts.js'
 import { SECRET_KEY } from '../env.config.js'
+import { withoutKeys } from '../utils/helpers/index.js'
 
 const JWT_NAME = 'jwt'
 const JWT_SETTINGS = {
@@ -14,27 +19,22 @@ const JWT_SETTINGS = {
 const JWT_EXPIRES = '7d'
 
 export const signup = (req, res, next) => {
-  const {
-    name, about, avatar, password, email,
-  } = req.body
+  const userData = req.body
 
-  bcrypt.hash(password, 10)
+  bcrypt.hash(userData.password, 10)
     .then((hash) => {
-      User.create({
-        name, about, avatar, email, password: hash,
-      })
+      User.create({ ...userData, password: hash })
         .then((user) => {
-          const {
-            _id, name, about, avatar, email,
-          } = user
-
-          res.send({
-            _id, name, about, avatar, email,
-          })
+          const userResponse = withoutKeys(user.toObject(), ['password'])
+          res.send(userResponse)
         })
-        .catch(next)
+        .catch((error) => {
+          if (error.code === 11000) {
+            return next(new ConflictError(MESSAGE.USER.CONFLICT_EMAIL))
+          }
+          return next(error)
+        })
     })
-    .catch(next)
 }
 
 export const signin = (req, res, next) => {
