@@ -1,9 +1,13 @@
-import { STATUS } from '../consts.js'
+const { STATUS } = require('../consts');
 
-export class ForbiddenError extends Error {
+class ForbiddenError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'ForbiddenError'
-    this.statusCode = STATUS.FORBIDDEN
+    super(message);
+    this.name = 'ForbiddenError';
+    this.statusCode = STATUS.FORBIDDEN;
   }
 }
+
+module.exports = {
+  ForbiddenError,
+};

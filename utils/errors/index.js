@@ -1,5 +1,13 @@
-export { UnauthorizedError } from './UnauthorizedError.js'
-export { NotFoundError } from './NotFoundError.js'
-export { ForbiddenError } from './ForbiddenError.js'
-export { ConflictError } from './ConflictError.js'
-export { BadRequestError } from './BadRequestError.js'
+const { UnauthorizedError } = require('./UnauthorizedError');
+const { NotFoundError } = require('./NotFoundError');
+const { ForbiddenError } = require('./ForbiddenError');
+const { ConflictError } = require('./ConflictError');
+const { BadRequestError } = require('./BadRequestError');
+
+module.exports = {
+  NotFoundError,
+  UnauthorizedError,
+  ForbiddenError,
+  ConflictError,
+  BadRequestError,
+};

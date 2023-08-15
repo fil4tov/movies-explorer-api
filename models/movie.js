@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import validator from 'validator'
+const mongoose = require('mongoose');
+const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -65,6 +65,10 @@ const movieSchema = new mongoose.Schema({
   },
 }, {
   versionKey: false,
-})
+});
 
-export const Movie = mongoose.model('movie', movieSchema)
+const Movie = mongoose.model('movie', movieSchema);
+
+module.exports = {
+  Movie,
+};

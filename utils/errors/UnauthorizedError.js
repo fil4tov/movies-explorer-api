@@ -1,9 +1,13 @@
-import { STATUS } from '../consts.js'
+const { STATUS } = require('../consts');
 
-export class UnauthorizedError extends Error {
+class UnauthorizedError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'UnauthorizedError'
-    this.statusCode = STATUS.UNAUTHORIZED
+    super(message);
+    this.name = 'UnauthorizedError';
+    this.statusCode = STATUS.UNAUTHORIZED;
   }
 }
+
+module.exports = {
+  UnauthorizedError,
+};

@@ -1,18 +1,16 @@
-import express from 'express'
-import {
+const express = require('express');
+const {
   getUserInfo,
   patchUserInfo,
-} from '../controllers/users.js'
+} = require('../controllers/users');
 
-import {
+const {
   celebratePatchUserInfo,
-} from '../validators/users.js'
+} = require('../validators/users');
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/users/me', getUserInfo)
-router.patch('/users/me', celebratePatchUserInfo, patchUserInfo)
+router.get('/users/me', getUserInfo);
+router.patch('/users/me', celebratePatchUserInfo, patchUserInfo);
 
-export {
-  router as usersRouter,
-}
+module.exports = router;

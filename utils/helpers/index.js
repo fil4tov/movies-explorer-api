@@ -1,1 +1,5 @@
-export { withoutKeys } from './withoutKeys.js'
+const { withoutKeys } = require('./withoutKeys');
+
+module.exports = {
+  withoutKeys,
+};

@@ -1,4 +1,4 @@
-export const MESSAGE = {
+const MESSAGE = {
   COMMON: {
     NOT_FOUND: 'По указанному пути ничего не найдено',
     SERVER_ERROR: 'На сервере произошла ошибка',
@@ -16,23 +16,31 @@ export const MESSAGE = {
     DELETE_FORBIDDEN: 'Удалять можно только свои фильмы',
     DELETE_SUCCESS: 'Фильм успешно удален',
   },
-}
+};
 
-export const STATUS = {
+const STATUS = {
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
   DEFAULT: 500,
-}
+};
 
-export const ALLOWED_CORS = [
+const ALLOWED_CORS = [
   'https://movies.fil4tov.ru',
   'http://dev.local:3000',
   'http://localhost:3000',
-]
+];
 
-export const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE'
+const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-export const URL_REGEX = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/
+const URL_REGEX = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?/;
+
+module.exports = {
+  STATUS,
+  URL_REGEX,
+  MESSAGE,
+  ALLOWED_CORS,
+  DEFAULT_ALLOWED_METHODS,
+};

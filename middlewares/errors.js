@@ -1,9 +1,13 @@
-import { MESSAGE } from '../utils/consts.js'
+const { MESSAGE } = require('../utils/consts');
 
-export const errorsMiddleware = (error, req, res, next) => {
-  const { statusCode = 500, message = MESSAGE.COMMON.SERVER_ERROR } = error
+const errorsMiddleware = (error, req, res, next) => {
+  const { statusCode = 500, message = MESSAGE.COMMON.SERVER_ERROR } = error;
 
-  res.status(statusCode).send({ message })
+  res.status(statusCode).send({ message });
 
-  next()
-}
+  next();
+};
+
+module.exports = {
+  errorsMiddleware,
+};

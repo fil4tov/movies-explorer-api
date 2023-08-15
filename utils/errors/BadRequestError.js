@@ -1,9 +1,13 @@
-import { STATUS } from '../consts.js'
+const { STATUS } = require('../consts');
 
-export class BadRequestError extends Error {
+class BadRequestError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'BadRequestError'
-    this.statusCode = STATUS.BAD_REQUEST
+    super(message);
+    this.name = 'BadRequestError';
+    this.statusCode = STATUS.BAD_REQUEST;
   }
 }
+
+module.exports = {
+  BadRequestError,
+};

@@ -1,23 +1,27 @@
-import jwt from 'jsonwebtoken'
-import { UnauthorizedError } from '../utils/errors/index.js'
-import { SECRET_KEY } from '../env.config.js'
+const jwt = require('jsonwebtoken');
+const { UnauthorizedError } = require('../utils/errors');
+const { SECRET_KEY } = require('../env.config');
 
-export const authMiddleware = (req, res, next) => {
-  const { jwt: token } = req.cookies
+const authMiddleware = (req, res, next) => {
+  const { jwt: token } = req.cookies;
 
   if (!token) {
-    throw new UnauthorizedError('Необходима авторизация')
+    throw new UnauthorizedError('Необходима авторизация');
   }
 
-  let payload
+  let payload;
 
   try {
-    payload = jwt.verify(token, SECRET_KEY)
+    payload = jwt.verify(token, SECRET_KEY);
   } catch (err) {
-    throw new UnauthorizedError('Необходима авторизация')
+    throw new UnauthorizedError('Необходима авторизация');
   }
 
-  req.user = payload
+  req.user = payload;
 
-  next()
-}
+  next();
+};
+
+module.exports = {
+  authMiddleware,
+};

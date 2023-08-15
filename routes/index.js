@@ -1,19 +1,21 @@
-import express from 'express'
-import { moviesRouter } from './movies.js'
-import { usersRouter } from './users.js'
-import { authorizationRouter } from './authorization.js'
-import { authMiddleware } from '../middlewares/index.js'
-import { NotFoundError } from '../utils/errors/index.js'
-import { MESSAGE } from '../utils/consts.js'
+const express = require('express');
+const moviesRouter = require('./movies');
+const usersRouter = require('./users');
+const authorizationRouter = require('./authorization');
+const { authMiddleware } = require('../middlewares');
+const { NotFoundError } = require('../utils/errors');
+const { MESSAGE } = require('../utils/consts');
 
-const router = express.Router()
+const router = express.Router();
 
-router.use(authorizationRouter)
-router.use(authMiddleware, moviesRouter)
-router.use(authMiddleware, usersRouter)
+router.use(authorizationRouter);
+router.use(authMiddleware, moviesRouter);
+router.use(authMiddleware, usersRouter);
 
 router.all('*', authMiddleware, (req, res, next) => {
-  next(new NotFoundError(MESSAGE.COMMON.NOT_FOUND))
-})
+  next(new NotFoundError(MESSAGE.COMMON.NOT_FOUND));
+});
 
-export { router }
+module.exports = {
+  router,
+};

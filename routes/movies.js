@@ -1,21 +1,19 @@
-import express from 'express'
-import {
+const express = require('express');
+const {
   addMovieToFavorites,
   deleteMovieFromFavorites,
   getAllFavoritesMovies,
-} from '../controllers/movies.js'
+} = require('../controllers/movies');
 
-import {
+const {
   celebrateDeleteMovie,
   celebrateCreateMovie,
-} from '../validators/movies.js'
+} = require('../validators/movies');
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/movies', getAllFavoritesMovies)
-router.post('/movies', celebrateCreateMovie, addMovieToFavorites)
-router.delete('/movies:_id', celebrateDeleteMovie, deleteMovieFromFavorites)
+router.get('/movies', getAllFavoritesMovies);
+router.post('/movies', celebrateCreateMovie, addMovieToFavorites);
+router.delete('/movies/:_id', celebrateDeleteMovie, deleteMovieFromFavorites);
 
-export {
-  router as moviesRouter,
-}
+module.exports = router;

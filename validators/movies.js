@@ -1,7 +1,7 @@
-import { celebrate, Joi } from 'celebrate'
-import { URL_REGEX } from '../utils/consts.js'
+const { celebrate, Joi } = require('celebrate');
+const { URL_REGEX } = require('../utils/consts');
 
-export const celebrateCreateMovie = celebrate({
+const celebrateCreateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
@@ -15,10 +15,15 @@ export const celebrateCreateMovie = celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
-})
+});
 
-export const celebrateDeleteMovie = celebrate({
+const celebrateDeleteMovie = celebrate({
   params: Joi.object().keys({
     _id: Joi.string().length(24).hex().required(),
   }),
-})
+});
+
+module.exports = {
+  celebrateDeleteMovie,
+  celebrateCreateMovie,
+};

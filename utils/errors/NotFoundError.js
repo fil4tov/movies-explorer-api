@@ -1,9 +1,13 @@
-import { STATUS } from '../consts.js'
+const { STATUS } = require('../consts');
 
-export class NotFoundError extends Error {
+class NotFoundError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'NotFoundError'
-    this.statusCode = STATUS.NOT_FOUND
+    super(message);
+    this.name = 'NotFoundError';
+    this.statusCode = STATUS.NOT_FOUND;
   }
 }
+
+module.exports = {
+  NotFoundError,
+};

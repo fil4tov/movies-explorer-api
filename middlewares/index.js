@@ -1,4 +1,12 @@
-export { requestLogger, errorLogger } from './logger.js'
-export { authMiddleware } from './auth.js'
-export { corsMiddleware } from './cors.js'
-export { errorsMiddleware } from './errors.js'
+const { requestLogger, errorLogger } = require('./logger');
+const { authMiddleware } = require('./auth');
+const { corsMiddleware } = require('./cors');
+const { errorsMiddleware } = require('./errors');
+
+module.exports = {
+  requestLogger,
+  errorLogger,
+  authMiddleware,
+  corsMiddleware,
+  errorsMiddleware,
+};

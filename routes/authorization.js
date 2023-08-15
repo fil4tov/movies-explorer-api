@@ -1,13 +1,11 @@
-import express from 'express'
-import { celebrateSignIn, celebrateSignUp } from '../validators/users.js'
-import { signin, signout, signup } from '../controllers/users.js'
+const express = require('express');
+const { celebrateSignIn, celebrateSignUp } = require('../validators/users');
+const { signin, signout, signup } = require('../controllers/users');
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/signup', celebrateSignUp, signup)
-router.post('/signin', celebrateSignIn, signin)
-router.get('/signout', signout)
+router.post('/signup', celebrateSignUp, signup);
+router.post('/signin', celebrateSignIn, signin);
+router.get('/signout', signout);
 
-export {
-  router as authorizationRouter,
-}
+module.exports = router;

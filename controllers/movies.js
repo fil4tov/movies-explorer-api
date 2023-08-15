@@ -1,39 +1,51 @@
-import { Movie } from '../models/movie.js'
-import { ForbiddenError, NotFoundError } from '../utils/errors/index.js'
-import { MESSAGE } from '../utils/consts.js'
+const { Movie } = require('../models/movie');
+const { ForbiddenError, NotFoundError, BadRequestError } = require('../utils/errors');
+const { MESSAGE } = require('../utils/consts');
 
-export const addMovieToFavorites = (req, res, next) => {
-  const data = req.body
-  const owner = req.user._id
+const addMovieToFavorites = (req, res, next) => {
+  const data = req.body;
+  const owner = req.user._id;
 
   Movie.create({ ...data, owner })
     .then((card) => res.send(card))
-    .catch(next)
-}
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError(`${Object.values(err.errors).map((error) => error.message).join(', ')}`));
+      } else {
+        next(err);
+      }
+    });
+};
 
-export const getAllFavoritesMovies = (req, res, next) => {
-  const owner = req.user._id
+const getAllFavoritesMovies = (req, res, next) => {
+  const owner = req.user._id;
   Movie.find({ owner })
     .then((movies) => res.send(movies))
-    .catch(next)
-}
+    .catch(next);
+};
 
-export const deleteMovieFromFavorites = (req, res, next) => {
-  const { _id } = req.params
+const deleteMovieFromFavorites = (req, res, next) => {
+  const id = req.params._id;
 
-  Movie.findById(_id)
+  Movie.findById(id)
     .orFail(() => {
-      throw new NotFoundError(MESSAGE.MOVIE.NOT_FOUND)
+      throw new NotFoundError(MESSAGE.MOVIE.NOT_FOUND);
     })
     .then(({ owner, _id }) => {
       if (owner.toString() !== req.user._id) {
-        throw new ForbiddenError(MESSAGE.MOVIE.DELETE_FORBIDDEN)
+        throw new ForbiddenError(MESSAGE.MOVIE.DELETE_FORBIDDEN);
       }
       Movie.findByIdAndRemove(_id)
         .then(() => {
-          res.send({ message: MESSAGE.MOVIE.DELETE_SUCCESS })
+          res.send({ message: MESSAGE.MOVIE.DELETE_SUCCESS });
         })
-        .catch(next)
+        .catch(next);
     })
-    .catch(next)
-}
+    .catch(next);
+};
+
+module.exports = {
+  addMovieToFavorites,
+  deleteMovieFromFavorites,
+  getAllFavoritesMovies,
+};

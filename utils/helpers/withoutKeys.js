@@ -1,9 +1,13 @@
-export const withoutKeys = (obj, keys) => {
-  const res = { ...obj }
+const withoutKeys = (obj, keys) => {
+  const res = { ...obj };
   keys.forEach((key) => {
     if (key in res) {
-      delete res[key]
+      delete res[key];
     }
-  })
-  return res
-}
+  });
+  return res;
+};
+
+module.exports = {
+  withoutKeys,
+};
